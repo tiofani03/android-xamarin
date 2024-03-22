@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/tvId"
+            tools:text="ID : 1"
+            android:layout_marginTop="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textSize="18sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+            android:id="@+id/tvDescription"
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at neque et mauris suscipit varius molestie non turpis. Cras vestibulum laoreet nulla, eu viverra leo mattis ac. Vestibulum fermentum lectus non efficitur bibendum."
+            android:layout_marginHorizontal="16dp"
+            android:maxLines="3"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
