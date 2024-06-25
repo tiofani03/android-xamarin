@@ -1,3 +1,6 @@
+using Android.App;
+using Android.Content;
+using productDemo.Feature;
 using SimpleInjector;
 
 namespace productDemo.DI
@@ -6,7 +9,7 @@ namespace productDemo.DI
     {
         public static Container Container { get; private set; }
 
-        public static void Configure()
+        public static void Configure(Context context)
         {
             Container = new Container();
 
@@ -14,7 +17,7 @@ namespace productDemo.DI
             DataDependencyConfig.ConfigureDataLayer(Container);
             FeatureDependencyConfig.ConfigureFeatureLayer(Container);
             NetworkDependencyConfig.ConfigureNetworkConfig(Container);
-
+            
             Container.Verify();
         }
     }

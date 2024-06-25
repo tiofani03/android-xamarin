@@ -59,6 +59,19 @@
         <Reference Include="System.Numerics.Vectors" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Data\Chucker\api\ChuckerInterceptor.cs" />
+        <Compile Include="Data\Chucker\api\model\Traffic.cs" />
+        <Compile Include="Data\Chucker\api\repo\IChuckerRepository.cs" />
+        <Compile Include="Data\Chucker\di\ChuckerRepositoryDependencyConfig.cs" />
+        <Compile Include="Data\Chucker\implementation\ChuckerDatabase.cs" />
+        <Compile Include="Data\Chucker\implementation\repository\ChuckerRepository.cs" />
+        <Compile Include="Data\Core\ErrorHelper.cs" />
+        <Compile Include="Data\Core\State.cs" />
+        <Compile Include="Data\Movie\api\IMovieRepository.cs" />
+        <Compile Include="Data\Movie\di\MovieRepositoryDependencyConfig.cs" />
+        <Compile Include="Data\Movie\impl\remote\api\IMovieService.cs" />
+        <Compile Include="Data\Movie\impl\remote\model\MovieResponse.cs" />
+        <Compile Include="Data\Movie\impl\repo\MovieRepository.cs" />
         <Compile Include="Data\Product\api\model\Product.cs" />
         <Compile Include="Data\Product\api\repo\IProductRepository.cs" />
         <Compile Include="Data\Product\di\ProductRepositoryDependencyConfig.cs" />
@@ -76,9 +89,26 @@
         <Compile Include="di\DependencyConfig.cs" />
         <Compile Include="di\FeatureDependencyConfig.cs" />
         <Compile Include="di\NetworkDependencyConfig.cs" />
+        <Compile Include="Feature\AppExtensions.cs" />
+        <Compile Include="Feature\Chucker\di\ChuckerDependencyConfig.cs" />
+        <Compile Include="Feature\Chucker\list\ListChuckerActivity.cs" />
+        <Compile Include="Feature\Chucker\list\ListChuckerAdapter.cs" />
+        <Compile Include="Feature\Chucker\list\ListChuckerViewModel.cs" />
+        <Compile Include="Feature\Demo\pages\bottom_sheet\BottomSheetChooseOutlet.cs" />
+        <Compile Include="Feature\Demo\pages\bottom_sheet\ChildAdapter.cs" />
+        <Compile Include="Feature\Demo\pages\bottom_sheet\ParentAdapter.cs" />
+        <Compile Include="Feature\Demo\pages\bottom_sheet\StickyBottomSheet.cs" />
+        <Compile Include="Feature\Demo\pages\demo\DemoActivity.cs" />
+        <Compile Include="Feature\Demo\pages\Helper.cs" />
+        <Compile Include="Feature\Demo\pages\MainDemoActivity.cs" />
+        <Compile Include="Feature\Demo\pages\MainDemoViewModel.cs" />
+        <Compile Include="Feature\Greeter.cs" />
+        <Compile Include="Feature\IComponentCreation.cs" />
+        <Compile Include="Feature\MyApp.cs" />
         <Compile Include="Feature\Product\di\ProductDependencyConfig.cs" />
         <Compile Include="Feature\Product\pages\list\ProductActivity.cs" />
         <Compile Include="Feature\Product\pages\list\ProductAdapter.cs" />
+        <Compile Include="Feature\Product\pages\list\ProductMovieAdapter.cs" />
         <Compile Include="Feature\Product\pages\list\ProductViewModel.cs" />
         <Compile Include="Feature\Todo\add\AddActivity.cs" />
         <Compile Include="Feature\Todo\add\AddViewModel.cs" />
@@ -99,14 +129,25 @@
     <ItemGroup>
         <AndroidResource Include="Resources\drawable\ic_add.xml" />
         <AndroidResource Include="Resources\layout\activity_add.xml" />
+        <AndroidResource Include="Resources\layout\activity_demo.xml" />
+        <AndroidResource Include="Resources\layout\activity_list_chucker.xml" />
+        <AndroidResource Include="Resources\layout\activity_main_demo.xml" />
         <AndroidResource Include="Resources\layout\activity_detail.xml" />
         <AndroidResource Include="Resources\layout\activity_main.xml">
             <SubType>Designer</SubType>
         </AndroidResource>
         <AndroidResource Include="Resources\layout\activity_product.xml" />
+        <AndroidResource Include="Resources\layout\bottom_sheet_choose_outlet.xml" />
+        <AndroidResource Include="Resources\layout\bottom_sheet_sticky.xml" />
         <AndroidResource Include="Resources\layout\content_main.xml">
             <SubType>Designer</SubType>
         </AndroidResource>
+        <AndroidResource Include="Resources\layout\item_check_box.xml" />
+        <AndroidResource Include="Resources\layout\item_child_check_box.xml">
+          <SubType>Designer</SubType>
+          <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+        </AndroidResource>
+        <AndroidResource Include="Resources\layout\item_chucker_transaction.xml" />
         <AndroidResource Include="Resources\layout\item_main.xml" />
         <AndroidResource Include="Resources\layout\item_product.xml" />
         <AndroidResource Include="Resources\values\colors.xml" />
@@ -134,24 +175,29 @@
         <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
     </ItemGroup>
     <ItemGroup>
+        <Folder Include="Data\Movie\impl\mapper\" />
         <Folder Include="Data\Todo\" />
+        <Folder Include="Feature\Chucker\detail\" />
+        <Folder Include="Feature\Product\pages\detail\" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Crosslight.Xamarin.Android.Support.v7.RecyclerView" Version="25.3.1" />
         <PackageReference Include="glidex.forms" Version="2.1.1.648" />
-        <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.0-preview.2.24128.5" />
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" /> <!-- Versi stable -->
         <PackageReference Include="Refit" Version="7.0.0" />
-        <PackageReference Include="Serilog.Extensions.Logging" Version="8.0.1-dev-10382" />
+        <PackageReference Include="Serilog.Extensions.Logging" Version="3.1.0" /> <!-- Versi stable -->
         <PackageReference Include="SimpleInjector" Version="5.4.4" />
-        <PackageReference Include="sqlite-net-pcl" Version="1.9.141-beta" />
+        <PackageReference Include="sqlite-net-pcl" Version="1.8.116" /> <!-- Versi stable -->
         <PackageReference Include="System.Net.Http" Version="4.3.4" />
-        <PackageReference Include="System.Net.Http.Json" Version="9.0.0-preview.2.24128.5" />
+        <PackageReference Include="System.Net.Http.Json" Version="6.0.0" /> <!-- Versi stable -->
         <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.2.0.5" />
         <PackageReference Include="Xamarin.AndroidX.CardView" Version="1.0.0.25" />
         <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.3.2.2" />
-        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.0.0.1" />
+        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.1.0.5" />
+        <PackageReference Include="Xamarin.AndroidX.ConstraintLayout" Version="2.0.4" /> <!-- Versi yang kompatibel -->
         <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     </ItemGroup>
+
     <ItemGroup>
       <Content Include=".gitignore" />
     </ItemGroup>

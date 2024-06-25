@@ -6,7 +6,7 @@ namespace productDemo.Data.Product.implementation.mapper
 {
     public static class ProductMapper
     {
-        public static List<api.model.Product> MapToDomainModel(List<ProductResponse> productResponses)
+         public static List<api.model.Product> MapToDomainModel(List<ProductResponse> productResponses)
         {
             return productResponses.Select(p => new api.model.Product
             {

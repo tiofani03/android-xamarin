@@ -20,7 +20,7 @@ using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace productDemo.Feature.Todo.main
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
+    [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = false)]
     public class MainActivity : AppCompatActivity
     {
         private const int UpdateRequestCode = 200;
@@ -34,8 +34,7 @@ namespace productDemo.Feature.Todo.main
             base.OnCreate(savedInstanceState);
             Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_main);
-
-            DependencyConfig.Configure();
+            
             _mainViewModel = DependencyConfig.Container.GetInstance<MainViewModel>();
 
             var toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);

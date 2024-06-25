@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using Java.Lang;
@@ -20,23 +21,22 @@ namespace productDemo.Feature.Todo.detail
     ]
     public class DetailActivity : AppCompatActivity
     {
+        private Button _btnDelete;
+        private Button _btnEdit;
         private DetailViewModel _detailViewModel;
 
         private Toolbar _toolbar;
-        
+
         private TextView _tvDate;
         private TextView _tvDesc;
         private TextView _tvId;
-
-        private Button _btnDelete;
-        private Button _btnEdit;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_detail);
-            DependencyConfig.Configure();
+            DependencyConfig.Configure(this);
             _detailViewModel = DependencyConfig.Container.GetInstance<DetailViewModel>();
 
             BindItem();
@@ -50,7 +50,7 @@ namespace productDemo.Feature.Todo.detail
             _tvDesc = FindViewById<TextView>(Resource.Id.tvDescription);
             _tvDate = FindViewById<TextView>(Resource.Id.tvDate);
             _toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
-            
+
             _btnDelete = FindViewById<Button>(Resource.Id.btnDelete);
             _btnEdit = FindViewById<Button>(Resource.Id.btnEdit);
 
@@ -67,23 +67,26 @@ namespace productDemo.Feature.Todo.detail
                 _tvId.Text = "ID : " + detail.ID;
                 _tvDesc.Text = detail.Text;
                 _tvDate.Text = detail.Date.ToString("HH:mm dd MMM yyyy");
-                
+
                 _btnDelete.Click += (sender, args) =>
                 {
                     _detailViewModel.DeleteData(detail);
                     Finish();
                 };
 
-                _btnEdit.Click += (sender, args) =>
+                var intent = new Intent(this, typeof(AddActivity));
+                intent.PutExtra("EXTRA_ID", detail.ID);
+
+                _btnEdit.Click += delegate
                 {
-                    var intent = new Intent(this, typeof(AddActivity));
-                    intent.PutExtra("EXTRA_ID", detail.ID);
-                    StartActivityForResult(intent, 200);
+                    StartActivity(intent);
                 };
+
+                // _btnEdit.Click += (sender, args) => { StartActivityForResult(intent, 200); };
             }
             catch (Exception ex)
             {
-                Toast.MakeText(this, "data tidak ditemukan "+ex, ToastLength.Long)?.Show();
+                Toast.MakeText(this, "data tidak ditemukan " + ex, ToastLength.Long)?.Show();
             }
         }
 
@@ -99,6 +102,14 @@ namespace productDemo.Feature.Todo.detail
         {
             Finish();
             return base.OnSupportNavigateUp();
+        }
+    }
+
+    public class MyClickListener : Object, View.IOnClickListener
+    {
+        public void OnClick(View v)
+        {
+            // Kode untuk menangani klik tombol disini
         }
     }
 }

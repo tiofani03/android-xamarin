@@ -14,11 +14,14 @@ namespace productDemo.Feature.Todo.add
 {
     [Activity(
         Label = "AddActivity Activity",
-        Theme = "@style/AppTheme.NoActionBar",
-        ParentActivity = typeof(MainActivity))
+        Theme = "@style/AppTheme.NoActionBar"
+        )
+        // ParentActivity = typeof(MainActivity))
     ]
     public class AddActivity : AppCompatActivity
     {
+        #region Properties
+
         private AddViewModel _addViewModel;
 
         private EditText _edtText;
@@ -26,13 +29,17 @@ namespace productDemo.Feature.Todo.add
         private Toolbar _toolbar;
         private Button btnSave;
 
+        #endregion
+
+
+        #region Methods
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Platform.Init(this, savedInstanceState);
             SetContentView(Resource.Layout.activity_add);
-            DependencyConfig.Configure();
+            DependencyConfig.Configure(this);
 
             _addViewModel = DependencyConfig.Container.GetInstance<AddViewModel>();
             BindItem();
@@ -46,11 +53,11 @@ namespace productDemo.Feature.Todo.add
             {
                 var note = await _addViewModel.GetDataById(id);
                 _edtText.Text = note.Text;
-                
+
                 SupportActionBar.Title = "Edit Data";
             }
-            
-            
+
+
             btnSave.Click += (sender, args) =>
             {
                 var text = _edtText.Text;
@@ -79,8 +86,19 @@ namespace productDemo.Feature.Todo.add
             SetSupportActionBar(_toolbar);
             SupportActionBar.Title = "Add Data";
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
-
-            
         }
+
+        public override bool OnSupportNavigateUp()
+        {
+            Finish();
+            return base.OnSupportNavigateUp();
+        }
+
+        public override void OnBackPressed()
+        {
+            Finish();
+        }
+
+        #endregion
     }
 }

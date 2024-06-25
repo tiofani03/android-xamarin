@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Button
+            android:id="@+id/btnProduct"
+            android:text="Demo Product"
+            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    <Button 
+            android:id="@+id/btnNote"
+            android:text="Demo note"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="match_parent" 
+            android:layout_height="wrap_content"/>
+
+    <Button
+            android:id="@+id/btnUiDemo"
+            android:text="Demo UI"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    <Button
+            android:id="@+id/btnChucker"
+            android:text="Demo Chucker"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+</LinearLayout>
